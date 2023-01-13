@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './domanda.dart';
+import './risposta.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,11 +12,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var domIndex = 0;
+  var _domIndex = 0;
 
   void risp() {
     setState(() {
-      domIndex = domIndex + 1;
+      _domIndex = _domIndex + 1;
     });
   }
 
@@ -32,19 +33,8 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Domanda(domande[domIndex]),
-            ElevatedButton(
-              onPressed: risp,
-              child: const Text("risp 1"),
-            ),
-            ElevatedButton(
-              onPressed: risp,
-              child: const Text("risp 2"),
-            ),
-            ElevatedButton(
-              onPressed: risp,
-              child: const Text("risp 3"),
-            ),
+            Domanda(domande[_domIndex]),
+            Risposta(risp),
           ],
         ),
       ),
