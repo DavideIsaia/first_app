@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import './domanda.dart';
 import './risposta.dart';
@@ -14,7 +16,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var _domIndex = 0;
 
-  void risp() {
+  void _risp() {
     setState(() {
       _domIndex = _domIndex + 1;
     });
@@ -23,8 +25,14 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     var domande = [
-      "Qual è il tuo colore preferito?",
-      "Qual è il tuo animale preferito?",
+      {
+        "testoDom": "Qual è il tuo colore preferito?",
+        "risposte": ["Nero", "Blu", "Rosso", "Bianco"],
+      },
+      {
+        "testoDom": "Qual è il tuo animale preferito?",
+        "risposte": ["Cavallo", "Cane", "Gatto", "Leone"],
+      },
     ];
     return MaterialApp(
       home: Scaffold(
@@ -33,8 +41,10 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Domanda(domande[_domIndex]),
-            Risposta(risp),
+            Domanda(domande[_domIndex]["testoDom"] as String),
+            ...(domande[_domIndex]["risposte"] as List<String>)
+                .map((risposta) => Risposta(_risp, risposta))
+                .toList()
           ],
         ),
       ),
